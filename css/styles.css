@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Calendario de la Renta — estilos (mobile-first)
+   Tema: variables en :root; oscuro automático por preferencia del sistema o
+   forzado con data-tema="claro|oscuro" en <html>.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --texto: #1a1f29;
+  --suave: #566070;
+  --borde: #d5dae2;
+  --acento: #1d4ed8;
+  --acento-texto: #ffffff;
+  --verde: #166534;  --verde-bg: #e3f4e8;
+  --ambar: #92400e;  --ambar-bg: #fdf0d5;
+  --rojo: #b91c1c;   --rojo-bg: #fde7e7;
+  --hecho: #4b5563;  --hecho-bg: #e9ecf0;
+  --sombra: 0 1px 2px rgb(0 0 0 / .06);
+}
+
+/* Oscuro automático (si el usuario no fuerza el claro). Mantener sincronizado con [data-tema="oscuro"]. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    color-scheme: dark;
+    --bg: #0f1319; --card: #181e27; --texto: #e8ebf0; --suave: #a0aab8; --borde: #2c3542;
+    --acento: #8ab0ff; --acento-texto: #0b1220;
+    --verde: #6ee7a0;  --verde-bg: #14301f;
+    --ambar: #fcd34d;  --ambar-bg: #382a0c;
+    --rojo: #fca5a5;   --rojo-bg: #3d1818;
+    --hecho: #aab3c0;  --hecho-bg: #222a35;
+    --sombra: none;
+  }
+}
+:root[data-tema="oscuro"] {
+  color-scheme: dark;
+  --bg: #0f1319; --card: #181e27; --texto: #e8ebf0; --suave: #a0aab8; --borde: #2c3542;
+  --acento: #8ab0ff; --acento-texto: #0b1220;
+  --verde: #6ee7a0;  --verde-bg: #14301f;
+  --ambar: #fcd34d;  --ambar-bg: #382a0c;
+  --rojo: #fca5a5;   --rojo-bg: #3d1818;
+  --hecho: #aab3c0;  --hecho-bg: #222a35;
+  --sombra: none;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Contenedor central; en móvil ocupa todo el ancho con 16 px de margen */
+.cabecera, main, .pie { max-width: 40rem; margin-inline: auto; padding-inline: 1rem; }
+main { padding-bottom: 1rem; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+h1 { font-size: 1.4rem; }
+h2 { font-size: 1.15rem; margin: 1.5rem 0 .75rem; }
+h3 { font-size: 1.05rem; }
+a { color: var(--acento); }
+
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; border-radius: 4px; }
+
+.saltar {
+  position: absolute; left: .5rem; top: -4rem; z-index: 10;
+  background: var(--card); padding: .5rem 1rem; border-radius: 6px;
+}
+.saltar:focus { top: .5rem; }
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem;
+  padding-block: 1rem .5rem;
+}
+.subtitulo { margin: .15rem 0 0; color: var(--suave); font-size: .9rem; }
+
+/* ---------- Botones ---------- */
+.btn {
+  font: inherit; font-weight: 600; cursor: pointer;
+  min-height: 2.75rem; padding: .5rem 1rem; /* objetivo táctil ≥ 44 px */
+  background: var(--card); color: var(--texto);
+  border: 1px solid var(--borde); border-radius: 10px;
+}
+.btn:hover { border-color: var(--acento); }
+.btn--primario { background: var(--acento); color: var(--acento-texto); border-color: var(--acento); width: 100%; }
+.btn--sutil { font-size: .85rem; font-weight: 500; white-space: nowrap; }
+.btn--hecho[data-hecho="true"] { background: var(--hecho-bg); color: var(--hecho); }
+.btn:disabled { opacity: .6; cursor: default; }
+
+.acciones { margin: 1rem 0 .25rem; }
+.fila { display: flex; flex-wrap: wrap; gap: .5rem; }
+.fila .btn { flex: 1 1 12rem; }
+.ayuda { color: var(--suave); font-size: .875rem; margin: .25rem 0 0; }
+
+/* ---------- Avisos ---------- */
+.aviso { border-radius: 12px; padding: .75rem 1rem; margin: .75rem 0; border: 1px solid var(--borde); }
+.aviso--nota { background: var(--ambar-bg); color: var(--ambar); border-color: transparent; font-size: .9rem; }
+.aviso--rojo { background: var(--rojo-bg); color: var(--rojo); border: 2px solid var(--rojo); }
+.aviso--rojo ul { margin: .5rem 0; padding-left: 1.25rem; }
+.aviso--rojo .btn { display: inline-block; text-decoration: none; background: var(--rojo); color: var(--rojo-bg); border-color: var(--rojo); }
+
+/* ---------- Próximo hito ---------- */
+.proximo {
+  background: var(--card); border: 1px solid var(--borde); border-left-width: 8px;
+  border-radius: 14px; padding: 1rem; box-shadow: var(--sombra);
+}
+.proximo--verde { border-left-color: var(--verde); }
+.proximo--ambar { border-left-color: var(--ambar); }
+.proximo--rojo  { border-left-color: var(--rojo); }
+.proximo__etq { margin: 0; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--suave); }
+.proximo__cuenta { margin: .25rem 0; font-size: 2.5rem; font-weight: 800; line-height: 1.1; }
+.proximo--verde .proximo__cuenta { color: var(--verde); }
+.proximo--ambar .proximo__cuenta { color: var(--ambar); }
+.proximo--rojo  .proximo__cuenta { color: var(--rojo); }
+.proximo__nombre { margin: 0; font-weight: 600; }
+.proximo__fecha { margin: 0; color: var(--suave); font-size: .9rem; }
+
+/* ---------- Lista de hitos ---------- */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.hito {
+  background: var(--card); border: 1px solid var(--borde); border-left-width: 6px;
+  border-radius: 12px; padding: .875rem 1rem; box-shadow: var(--sombra);
+}
+.hito--verde { border-left-color: var(--verde); }
+.hito--ambar { border-left-color: var(--ambar); }
+.hito--rojo  { border-left-color: var(--rojo); }
+.hito--hecho { border-left-color: var(--hecho); }
+.hito--hecho .hito__nombre { text-decoration: line-through; color: var(--suave); }
+
+.hito__cab { display: flex; justify-content: space-between; gap: .75rem; align-items: flex-start; }
+.hito__fecha { margin: .15rem 0 0; font-size: .875rem; color: var(--suave); }
+.hito__desc { margin: .5rem 0; font-size: .925rem; }
+.hito__auto { margin: .5rem 0; font-size: .9rem; font-weight: 600; }
+.hito__resumen { margin: .5rem 0; padding: .4rem .6rem; background: var(--bg); border-radius: 8px; font-size: .9rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+.insignia {
+  flex: none; font-size: .8rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; white-space: nowrap;
+}
+.insignia--verde { background: var(--verde-bg); color: var(--verde); }
+.insignia--ambar { background: var(--ambar-bg); color: var(--ambar); }
+.insignia--rojo  { background: var(--rojo-bg);  color: var(--rojo); }
+.insignia--hecho { background: var(--hecho-bg); color: var(--hecho); }
+
+.etiqueta {
+  font-size: .75rem; font-weight: 600; padding: .05rem .4rem; border-radius: 4px;
+  background: var(--ambar-bg); color: var(--ambar);
+}
+
+details { margin: .5rem 0; }
+summary { cursor: pointer; font-size: .9rem; color: var(--acento); min-height: 2rem; display: flex; align-items: center; }
+.campos { display: grid; gap: .6rem; padding-top: .5rem; }
+label.campo { display: grid; gap: .2rem; font-size: .875rem; color: var(--suave); }
+input[type="text"], textarea {
+  font: inherit; color: var(--texto); background: var(--bg);
+  border: 1px solid var(--borde); border-radius: 8px; padding: .5rem .6rem; width: 100%;
+}
+textarea { min-height: 4.5rem; resize: vertical; }
+.hito .btn--hecho { width: 100%; margin-top: .25rem; }
+
+/* ---------- Paneles de ajustes ---------- */
+.panel { background: var(--card); border: 1px solid var(--borde); border-radius: 12px; padding: 0 1rem 1rem; margin-top: 1.5rem; }
+.panel h2 { margin-top: 1rem; }
+.check { display: flex; gap: .75rem; align-items: flex-start; padding: .5rem 0; cursor: pointer; }
+.check input { width: 1.4rem; height: 1.4rem; margin: .1rem 0 0; flex: none; accent-color: var(--acento); }
+
+/* ---------- Pie y aviso emergente ---------- */
+.pie { padding-block: 1rem 3rem; text-align: center; color: var(--suave); font-size: .875rem; }
+.toast {
+  position: fixed; left: 50%; bottom: 1rem; transform: translate(-50%, 150%);
+  max-width: min(32rem, calc(100% - 2rem)); padding: .75rem 1rem; border-radius: 10px;
+  background: var(--texto); color: var(--bg); font-size: .9rem;
+  transition: transform .25s ease; z-index: 20;
+}
+.toast.visible { transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+@media (min-width: 40rem) { .btn--primario { width: auto; } }
+
+/* Texto sólo para lectores de pantalla */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}

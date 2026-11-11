@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendario de la Renta</title>
+  <meta name="description" content="Fechas clave de la declaración de la renta en España, con avisos y exportación a tu calendario.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d4ed8'/%3E%3Crect x='10' y='16' width='44' height='38' rx='5' fill='white'/%3E%3Crect x='10' y='16' width='44' height='11' rx='5' fill='%23fbbf24'/%3E%3Ctext x='32' y='47' font-size='20' text-anchor='middle' font-family='sans-serif' font-weight='bold' fill='%231d4ed8'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Aplica el tema guardado antes de pintar para evitar un destello -->
+  <script>
+    try {
+      var t = JSON.parse(localStorage.getItem('calendarioRenta:v1')).tema;
+      if (t === 'claro' || t === 'oscuro') document.documentElement.dataset.tema = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div>
+      <h1>Calendario de la Renta</h1>
+      <p class="subtitulo" id="subtitulo">Cargando…</p>
+    </div>
+    <button type="button" id="btn-tema" class="btn btn--sutil"></button>
+  </header>
+
+  <main id="principal">
+    <!-- Aviso de hitos vencidos (se rellena desde app.js) -->
+    <div id="aviso-vencido" class="aviso aviso--rojo" role="alert" hidden></div>
+
+    <p class="aviso aviso--nota" id="aviso-fechas">
+      <strong>Verifica las fechas en la web de la Agencia Tributaria cada año.</strong>
+      <span id="aviso-estimadas" hidden> Las marcadas como «estimada» aún no están confirmadas.</span>
+    </p>
+
+    <section class="proximo" id="proximo" aria-labelledby="t-proximo"></section>
+
+    <p class="acciones">
+      <button type="button" id="btn-ics" class="btn btn--primario">📅 Exportar a mi calendario</button>
+    </p>
+    <p class="ayuda">Descarga un archivo .ics con alarmas 14, 7 y 1 día antes; ábrelo en tu móvil para importarlo.</p>
+
+    <section aria-labelledby="t-hitos">
+      <h2 id="t-hitos">Hitos de la campaña</h2>
+      <ol class="lista" id="lista"></ol>
+    </section>
+
+    <section class="panel" aria-labelledby="t-ajustes">
+      <h2 id="t-ajustes">Ajustes</h2>
+      <label class="check">
+        <input type="checkbox" id="aj-fraccionada">
+        <span>Mi declaración es <strong>fraccionada</strong> (60 % / 40 %)</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="aj-domiciliada">
+        <span>Ya la he <strong>domiciliado</strong></span>
+      </label>
+      <p class="ayuda" id="aj-ayuda-domiciliada" hidden>
+        Los pagos aparecen como «cargo automático»: ten saldo en la cuenta ese día.
+      </p>
+      <label class="check">
+        <input type="checkbox" id="aj-avisos">
+        <span>Avisarme al abrir la web si hay hitos cercanos (notificación del navegador)</span>
+      </label>
+      <p class="ayuda">Las notas y el importe de cada hito se editan en «Notas» dentro de cada tarjeta.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="t-datos">
+      <h2 id="t-datos">Copia de seguridad</h2>
+      <p class="ayuda">Tus datos sólo viven en este navegador. Guarda una copia por si borras los datos del sitio.</p>
+      <div class="fila">
+        <button type="button" id="btn-exportar" class="btn">⬇️ Exportar datos (JSON)</button>
+        <button type="button" id="btn-importar" class="btn">⬆️ Importar datos</button>
+        <input type="file" id="archivo-importar" accept="application/json,.json" hidden>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Información general, no es asesoramiento fiscal.</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

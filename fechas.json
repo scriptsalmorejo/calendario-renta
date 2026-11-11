@@ -1,0 +1,55 @@
+{
+  "_ayuda": "Edita este archivo cada año: cambia 'campana', 'ejercicio' y las fechas (AAAA-MM-DD). Quita 'estimada' cuando confirmes la fecha en la web de la AEAT. No borres los 'id'.",
+  "campana": 2027,
+  "ejercicio": 2026,
+  "sedeUrl": "https://sede.agenciatributaria.gob.es/Sede/Renta.html",
+  "hitos": [
+    {
+      "id": "inicio",
+      "nombre": "Inicio de la campaña",
+      "fecha": "2027-04-07",
+      "estimada": true,
+      "descripcion": "Se abre la presentación de la declaración por internet (Renta WEB)."
+    },
+    {
+      "id": "telefono",
+      "nombre": "Inicio de presentación por teléfono / cita",
+      "fecha": "2027-05-06",
+      "estimada": true,
+      "descripcion": "Empieza la atención con cita previa y por teléfono para presentar la declaración."
+    },
+    {
+      "id": "finDomiciliacion",
+      "nombre": "Fin de domiciliación bancaria",
+      "fecha": "2027-06-25",
+      "estimada": true,
+      "descripcion": "Último día para presentar con domiciliación. Al domiciliar eliges los plazos y no tienes que pagar a mano.",
+      "autoHechoSiDomiciliada": true
+    },
+    {
+      "id": "plazo1",
+      "nombre": "Primer plazo del pago (60 %)",
+      "fecha": "2027-06-30",
+      "descripcion": "60 % del importe si fraccionas. Se paga al presentar la declaración, como máximo al fin de campaña.",
+      "pago": true,
+      "sinFraccionar": {
+        "nombre": "Pago de la declaración (100 %)",
+        "descripcion": "Sin fraccionar, se paga el importe completo al presentar la declaración, como máximo al fin de campaña."
+      }
+    },
+    {
+      "id": "finCampana",
+      "nombre": "Fin de campaña",
+      "fecha": "2027-06-30",
+      "descripcion": "Último día para presentar la declaración de la renta."
+    },
+    {
+      "id": "plazo2",
+      "nombre": "Segundo plazo del fraccionamiento (40 %)",
+      "fecha": "2027-11-05",
+      "descripcion": "40 % restante del importe fraccionado. Si domicilias, se carga solo.",
+      "pago": true,
+      "soloFraccionada": true
+    }
+  ]
+}
